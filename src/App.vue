@@ -67,6 +67,7 @@ import VueAxios from 'vue-axios'
 import router from '@/router'
 import API from './mixins/API.js'
 import Vuetify from 'vuetify'
+import VueAuthenticate from 'vue-authenticate'
 
 Vue.use(VueAxios, axios)
 Vue.use(Vuetify, {
@@ -76,6 +77,13 @@ Vue.use(Vuetify, {
 		accent: '#8c9eff',
 		error: '#b71c1c'
 	}
+})
+
+Vue.use(VueAuthenticate, {
+  baseUrl: 'http://devapi.icarusmap.com', // Your API domain
+  
+  providers: {
+  }
 })
 
 	export default {

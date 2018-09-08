@@ -4,15 +4,14 @@
 import Vue from 'vue';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import router from '@/router'
 
 Vue.use(VueAxios, axios)
 
 export default {
   data () {
   	return {
-  		//base_url: 'http://devapi.icarusmap.com'
-      base_url: 'http://localhost:8000'
+  		base_url: 'http://devapi.icarusmap.com'
+      //base_url: 'http://localhost:8000'
   	}
   },
   methods: {
@@ -35,6 +34,23 @@ export default {
       axios.post(url,body, {withCredentials:true})
         .then(success)
         .catch(failure);
+    },
+    authLogin(username, password) {
+      console.log('here')
+      var this_ = this;
+      let user = {
+        username, 
+        password
+      };
+
+      if (this.$auth.isAuthenticated()) {
+        this.$auth.logout()  
+      }
+
+      this.$auth.login(user).then(function (response) {
+        this_.response = response
+        console.log('success!!')
+      })
     },
     logoff(success, failure) {
     	var url = this.base_url + '/user/logout/'

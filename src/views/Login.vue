@@ -114,28 +114,7 @@ export default {
   },
   methods: {
     userLogin() {
-      if (this.$refs.form.validate()) {
-        this.login(this.loginUsername, this.loginPassword,
-          response => {
-            if (response.status == 200) {
-              this.loginDialog = true;
-              this.signUpDialog = false;
-              this.$emit('change-toolbar-color', 'primary')
-              this.$emit('login')
-              router.push('/homepage')
-              console.log('logged in!!')
-            }
-          },
-          error => {
-            if (error.response.status == 400) {
-              this.$emit('snackbar', 6000, error.response.data['message'])
-            } else if (error.response.status == 500) {
-              throw error
-            }
-          })
-      } else {
-        this.$emits('snackbar', 6000, 'Fill out login info.')
-      }
+      this.authLogin(this.loginUsername, this.loginPassword)
     },
     onLogin() {
       router.push('/homepage')
